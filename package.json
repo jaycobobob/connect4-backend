@@ -1,0 +1,29 @@
+{
+  "name": "connect4-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./bin/app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaycobobob/connect4-backend.git"
+  },
+  "author": "Jacob Edwards",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jaycobobob/connect4-backend/issues"
+  },
+  "homepage": "https://github.com/jaycobobob/connect4-backend#readme",
+  "keywords": [],
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "http-errors": "^2.0.0",
+    "pino": "^7.10.0",
+    "pino-http": "^6.6.0",
+    "pino-pretty": "^7.6.1"
+  }
+}
