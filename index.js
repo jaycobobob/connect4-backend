@@ -18,6 +18,10 @@ const PORT = process.env.PORT || 3000;
 app.use("/board", boardUtils);
 app.use("/cpu", cpu);
 
+app.get("/", (req, res) => {
+    res.json({ message: "hello from connect4-backend" });
+});
+
 // Starts the express server and sets a callback function for when startup finishes
 app.listen(PORT, () => {
     console.log(`Listening to port ${PORT}`);

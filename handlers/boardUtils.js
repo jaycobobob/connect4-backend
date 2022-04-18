@@ -5,8 +5,8 @@ router.get("/", (req, res) => {
     res.json({ message: "hello from /handlers/boardUtils" });
 });
 
-router.get("/isGameOver", (req, res) => {
-    let board = req.body.board;
+router.get("/isGameOver/:board", (req, res) => {
+    let board = JSON.parse(req.params.board);
 
     const dirs = {
         N: [0, -1],
@@ -24,19 +24,19 @@ router.get("/isGameOver", (req, res) => {
     for (let y = 0; y < height; y++) {
         for (let x = 0; x < width; x++) {
             // only check cells with pieces for wins
-            if (board[y][x]) {
+            if (board[y][x].val) {
                 for (let v2 of Object.values(dirs)) {
                     let start = { x: x, y: y };
                     let end = { x: x + v2[0] * 4, y: y + v2[1] * 4 };
 
                     // if the end point is within the bounds of the board
                     if (end.x >= 0 && end.x < width && end.y >= 0 && end.y < height) {
-                        const target = board[start.y][start.x];
+                        const target = board[start.y][start.x].val;
                         let match = true;
 
                         // check every piece bewteen start and end to see if they all match
                         while (start.x !== end.x || start.y !== end.y) {
-                            if (board[start.y][start.x] !== target) {
+                            if (board[start.y][start.x].val !== target) {
                                 match = false;
                                 break;
                             }
@@ -60,26 +60,27 @@ router.get("/isGameOver", (req, res) => {
         }
     }
     if (boardFull) {
-        res.json({ success: true, winner: undefined });
+        res.json({ success: true, winner: "Tie" });
     } else {
         res.json({ success: false });
     }
 });
 
-router.get("/drop", (req, res) => {
-    const board = req.body.board;
-    const x = req.body.x;
+router.get("/drop/:board/:x", (req, res) => {
+    const board = JSON.parse(req.params.board);
+    const x = parseInt(req.params.x);
+
     let y = 0;
     // increase y until you reach the bottom of the board or you hit another piece
     while (y < board.length - 1 && !board[y + 1][x].val) {
         y++;
     }
-    res.json({ success: true, move: { x: x, y: y } });
+    res.json({ success: true, location: { x: x, y: y } });
 });
 
 const isColumnFull = (board, colNum) => {
     for (let y = 0; y < board.length; y++) {
-        if (board[y][colNum] === 0) {
+        if (board[y][colNum].val === 0) {
             return false;
         }
     }
