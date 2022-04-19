@@ -26,3 +26,5 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
     console.log(`Listening to port ${PORT}`);
 });
+
+// push to heroku using "git push heroku main"
