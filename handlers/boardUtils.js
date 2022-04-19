@@ -78,6 +78,18 @@ router.get("/drop/:board/:x", (req, res) => {
     res.json({ success: true, location: { x: x, y: y } });
 });
 
+router.get("/new", (req, res) => {
+    let out = [];
+    for (let i = 0; i < height; i++) {
+        let temp = [];
+        for (let j = 0; j < width; j++) {
+            temp.push({ x: j, y: i, val: 0 });
+        }
+        out.push(temp);
+    }
+    res.json({ success: true, board: out });
+});
+
 const isColumnFull = (board, colNum) => {
     for (let y = 0; y < board.length; y++) {
         if (board[y][colNum].val === 0) {
