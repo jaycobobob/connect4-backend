@@ -70,6 +70,11 @@ router.get("/drop/:board/:x", (req, res) => {
     const board = JSON.parse(req.params.board);
     const x = parseInt(req.params.x);
 
+    if (isColumnFull(board, x)) {
+        res.json({ success: false, msg: "Column full" });
+        return;
+    }
+
     let y = 0;
     // increase y until you reach the bottom of the board or you hit another piece
     while (y < board.length - 1 && !board[y + 1][x].val) {
