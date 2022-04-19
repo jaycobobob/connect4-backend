@@ -83,7 +83,10 @@ router.get("/drop/:board/:x", (req, res) => {
     res.json({ success: true, location: { x: x, y: y } });
 });
 
-router.get("/new", (req, res) => {
+router.get("/new/:width/:height", (req, res) => {
+    let width = parseInt(req.params.width);
+    let height = parseInt(req.params.height);
+
     let out = [];
     for (let i = 0; i < height; i++) {
         let temp = [];
