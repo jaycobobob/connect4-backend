@@ -60,7 +60,7 @@ router.get("/isGameOver/:board", (req, res) => {
         }
     }
     if (boardFull) {
-        res.json({ success: true, winner: "Tie" });
+        res.json({ success: true, winner: -1 });
     } else {
         res.json({ success: false });
     }
